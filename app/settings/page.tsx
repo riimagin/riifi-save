@@ -15,11 +15,11 @@ export default function SettingsPage() {
         <h1 className="text-3xl font-bold">Settings</h1>
         <p className="text-muted-foreground">Manage your account settings and preferences.</p>
       </div>
-      
+
       <div className="grid gap-6">
         {/* Settings content will go here */}
         <div className="text-muted-foreground">Settings page under construction...</div>
-      </div>
+              </div>
     </div>
   )
 }
