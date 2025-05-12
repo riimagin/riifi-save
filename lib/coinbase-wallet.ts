@@ -3,20 +3,18 @@ import { base } from 'wagmi/chains';
 
 // Initialize Coinbase Wallet SDK
 export const coinbaseWallet = new CoinbaseWalletSDK({
-  appName: 'RiiFI Platform',
-  appLogoUrl: 'https://example.com/logo.png',
+  appName: 'RiiFI Platform'
 });
 
 // Get the provider
-export const provider = coinbaseWallet.makeWeb3Provider(base.rpcUrls.default.http[0]);
+export const provider = coinbaseWallet.makeWeb3Provider();
 
 // Enable the provider
 export async function enableCoinbaseWallet(): Promise<string | null> {
   try {
-    const result = await provider.request({
+    const accounts = await provider.request({
       method: 'eth_requestAccounts'
-    });
-    const accounts = result as string[];
+    }) as string[];
     return accounts[0] || null;
   } catch (error) {
     console.error('Failed to enable Coinbase Wallet:', error);
@@ -27,10 +25,9 @@ export async function enableCoinbaseWallet(): Promise<string | null> {
 // Get chain ID
 export async function getChainId(): Promise<number> {
   try {
-    const result = await provider.request({
+    const chainId = await provider.request({
       method: 'eth_chainId'
-    });
-    const chainId = result as string;
+    }) as string;
     return parseInt(chainId, 16);
   } catch (error) {
     console.error('Failed to get chain ID:', error);
@@ -49,4 +46,4 @@ export async function switchToBase(): Promise<void> {
     console.error('Failed to switch to Base:', error);
     throw error;
   }
-} 
+}
